@@ -1,3 +1,9 @@
+
+/**
+ * Creates a new Validator object used to validate sentences.
+ *
+ * @class
+ */
 export default class Validator {
   #validTypes
   #validLength

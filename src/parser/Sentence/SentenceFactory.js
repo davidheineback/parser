@@ -3,7 +3,11 @@ import QuestionSentence from "./QuestionSentence.js"
 import RegularSentence from "./RegularSentence.js"
 import Sentence from "./Sentence.js"
 
-
+/**
+ * Create a SentenceFactory object that is responsible for creating sentences.
+ *
+ * @class SentenceFactory
+ */
 export default class SentenceFactory {
 
   constructor() {

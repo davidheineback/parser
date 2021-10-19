@@ -6,6 +6,11 @@ import Validator from './Validator.js'
 
 const { Tokenizer } = tokenizer
 
+/**
+ * Creates a new Document object.
+ * 
+ * @class
+ */
 export default class Document {
   #grammar = new SentenceGrammar()
   #sentences = new Sentences()
@@ -17,6 +22,12 @@ export default class Document {
 
   }
 
+  /**
+   *
+   *
+   * @param {String} stringToParse - A string to parse into sentences.
+   * @memberof Document
+   */
   parse(stringToParse) {
     this.#tokenContainer = new Tokenizer(this.#grammar, stringToParse)
     while (this.#tokenContainer.getActiveToken().tokenValue !== 'END') {

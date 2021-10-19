@@ -1,5 +1,10 @@
 import readline from 'readline'
 
+/**
+ * Creates a new Readline object.
+ * 
+ * @class
+ */
 export default class Readline {
   #document
 

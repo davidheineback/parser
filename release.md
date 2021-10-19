@@ -73,8 +73,12 @@ Tester kan köras via kommandot npm test.
 ## Kapitelreflektioner för kapitel 2-11
 
 ### Kapitel 2 - Meaningful names
+PrettyPrinter - Don't be cute.  
+Sentences vs Sentence väldigt lika.  
+
 
 ### Kapitel 3 - Functions
+Flera metoder på olika klasser som heter för att undvika Law of demeter.
 
 ### Kapitel 4 - Comments
 
