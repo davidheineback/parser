@@ -17,7 +17,7 @@
   - [x] Jag eftersträvar med denna inlämning högre betyg (C) och anser mig uppfylla alla extra krav för detta. 
     -[x] Jag är noga i min testning
     - [x] En del av testfallen är automatiserade (Tokenizer/Parser/PP), viss del kan vara manuellt testad.
-    - [ ] Det finns en tydlig beskrivning i hur mina moduler skall användas. 
+    - [x] Det finns en tydlig beskrivning i hur mina moduler skall användas. 
     - [ ] Mina reflektioner visar tydligt att jag förstått bokens koncept.
   - [ ] Jag eftersträvar med denna inlämning högsta betyg (A-B) 
     - [ ] Sammanhängande reflektion som ger ett gott helhetsintryck och visar detaljerad förståelse för kodkvalitet.
@@ -35,21 +35,25 @@ Förtydligande: Examinator kommer sätta betyg oberoende på vad ni anser. Att h
 
  * Beskriv komponenterna och hur de skall användas.
      - [Parser README.md](./README.md)
-     - [PrettyPrinter README.md](./README.md)  
+     - [PrettyPrinter README.md](https://github.com/davidheineback/prettyprinter#readme)  
 
  * Beskriv hur du anpassat din kod och instruktioner för att någon annan programmerare skall kunna använda dina komponenter. Om du skrivit instruktioner för din användare länka till dessa. Om inte beskriv här hur någon skall göra.  
-    - [Läs README.md](./README.md)
-    - [PrettyPrinter README.md](./README.md)  
+    - [Parser README.md](./README.md)
+    - [PrettyPrinter README.md](https://github.com/davidheineback/prettyprinter#readme)  
     
  * Beskriv hur du säkerhetställt att beroendena mellan komponenterna är som beskrivs i laborationen. 
     - [Tokenizer](https://gitlab.lnu.se/1dv610/student/du222aa/l1) är ett NPM paket och helt oberoende av koden i [Parser](https://gitlab.lnu.se/1dv610/student/du222aa/l2) & [PrettyPrinter](https://github.com/davidheineback/prettyprinter)
     - Även [Parser](https://gitlab.lnu.se/1dv610/student/du222aa/l2) är ett NPM paket och parsningen sker i parse metoden på Document klassen och denna testas av de automatiska testerna helt utan att PrettyPrinter är inblandad.
-    - [PrettyPrinter](https://github.com/davidheineback/prettyprinter) 
+    - [PrettyPrinter](https://github.com/davidheineback/prettyprinter) har beroende av Parser som installeras när man kör npm install.
 
 ## Beskrivning av min kod
-Beskriv din kod på en hög abstraktionsnivå. En kort beskrivning av dina viktigaste klasser och metoder i dina komponenter. Skapa gärna ett klassdiagram som bild. Beskriv relationerna mellan klasserna mellan komponenter.
+Klassdiagramet visar de viktigaste klasserna ock dess relationer.  
+Det viktigaste för att parsningen ska fungera är Document-klassen eftersom denna innehåller parse metoden.  
+Inne i parse metoden skapar jag en Tokenizer vilket man skulle kunna skicka med som argument via konstruktorn i Document men eftersom jag vill vara den som har kontroll över vilken Tokenizer det är som används så valde jag istället att bygga in denna istället för att lägga den som parameter.  
+Klassdiagrammet visar även att beroendet är så som beskrivits i uppgiften.
 
-Det viktigaste för att parsningen ska fungera är Documentklassen eftersom denna innehåller parse metoden. Inne i parse metoden skapar jag en tokenizer vilket man skulle kunna skicka med som argument via konstruktorn i Document men eftersom jag skapat en Fasad-klass och därmed vill hålla så mkt av komplexiteten borta från användaren så har jag valt att inte ge möjligheten att skicka med Tokenizer via Dependecy Injection.  
+
+![Class-diagram](./img/class-diagram.jpeg)
 
 
 ## Hur jag testat
@@ -60,7 +64,7 @@ Tester kan köras via kommandot npm test.
 
 ![TestReport](./img/testReport.png)
 
-**PrettyPrinter** är testad manuellt: 
+**PrettyPrinter** är testad manuellt så att färgkodning följer det i beskrivningen. Se resultat nedan:   
 
 ![Manuella Tester](./img/manualTest1.png)
 
