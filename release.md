@@ -76,19 +76,23 @@ Tester kan köras via kommandot npm test.
 PrettyPrinter - Don't be cute.  
 Sentences vs Sentence väldigt lika.  
 
-
 ### Kapitel 3 - Functions
 Flera metoder på olika klasser som heter för att undvika Law of demeter.
 
-### Kapitel 4 - Comments
+### Kapitel 4 - Comments  
+Använder endast jsdoc kommentarer på de viktagaste publika klasserna.
 
 ### Kapitel 5 - Formatting
+If satser innehåller till viss del lång formattering i villkor.
+Vertical openness kommer ganska av sig själv om man följer Functions kapitlet
+"Each group of lines represents a complete thought"
 
 ### Kapitel 6 - Objects and Data Structures
 
 ### Kapitel 7 - Error Handling
 
 ### Kapitel 8 - Boundaries
+Tredjepart i Tokenizer och readline från nodejs.
 
 ### Kapitel 9 - Unit Tests
 
