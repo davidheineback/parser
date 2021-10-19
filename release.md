@@ -30,16 +30,21 @@ Förtydligande: Examinator kommer sätta betyg oberoende på vad ni anser. Att h
 ## Komponenter och återanvändning
  * Länka in URL om du använder olika repositorier för dina olika komponenter. 
     - [Tokenizer](https://gitlab.lnu.se/1dv610/student/du222aa/l1)
-    - [Parser & PrettyPrinter](https://gitlab.lnu.se/1dv610/student/du222aa/l2)  
+    - [Parser](https://gitlab.lnu.se/1dv610/student/du222aa/l2)
+    - [PrettyPrinter](https://github.com/davidheineback/prettyprinter)
 
  * Beskriv komponenterna och hur de skall användas.
-     - [Läs README.md](./README.md)
+     - [Parser README.md](./README.md)
+     - [PrettyPrinter README.md](./README.md)  
+
  * Beskriv hur du anpassat din kod och instruktioner för att någon annan programmerare skall kunna använda dina komponenter. Om du skrivit instruktioner för din användare länka till dessa. Om inte beskriv här hur någon skall göra.  
     - [Läs README.md](./README.md)
+    - [PrettyPrinter README.md](./README.md)  
+    
  * Beskriv hur du säkerhetställt att beroendena mellan komponenterna är som beskrivs i laborationen. 
-    - Tokenizer är NPM paket och helt oberoende av koden i [Parser & PrettyPrinter](https://gitlab.lnu.se/1dv610/student/du222aa/l2)
-    - Parsningen sker i parse metoden på Document klassen och denna testas av de Automatiska testerna helt utan att PrettyPrinter är inblandad.
-    - Jag har skapat en fasad klass som kallas för ParserFacade och denna använder sig av PrettyPrinter som använder sig av Document.
+    - [Tokenizer](https://gitlab.lnu.se/1dv610/student/du222aa/l1) är ett NPM paket och helt oberoende av koden i [Parser](https://gitlab.lnu.se/1dv610/student/du222aa/l2) & [PrettyPrinter](https://github.com/davidheineback/prettyprinter)
+    - Även [Parser](https://gitlab.lnu.se/1dv610/student/du222aa/l2) är ett NPM paket och parsningen sker i parse metoden på Document klassen och denna testas av de automatiska testerna helt utan att PrettyPrinter är inblandad.
+    - [PrettyPrinter](https://github.com/davidheineback/prettyprinter) 
 
 ## Beskrivning av min kod
 Beskriv din kod på en hög abstraktionsnivå. En kort beskrivning av dina viktigaste klasser och metoder i dina komponenter. Skapa gärna ett klassdiagram som bild. Beskriv relationerna mellan klasserna mellan komponenter.
