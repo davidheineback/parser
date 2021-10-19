@@ -1,3 +1,7 @@
-import ParserFacade from './facade/ParserFacade.js'
+import Document from './parser/Document.js'
+import ReadLine from './parser/ReadLine.js'
 
-new ParserFacade()
+export default {
+  Document,
+  ReadLine
+}

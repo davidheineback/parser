@@ -1,19 +1,21 @@
 {
-  "name": "l2",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@david-heineback/parser",
+  "version": "1.0.1",
+  "description": "Parses string",
   "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest --testTimeout=20000 --runInBand --coverage --detectOpenHandles --verbose --forceExit"
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest --testTimeout=20000 --runInBand --coverage --detectOpenHandles --verbose --forceExit",
+    "publish:public": "npm publish --access=public"
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.lnu.se:1dv610/student/du222aa/l2.git"
+    "url": "git+https://github.com/davidheineback/parser.git"
   },
+  "homepage": "https://github.com/davidheineback/parser#readme",
   "keywords": [],
-  "author": "",
+  "author": "David Heinebäck",
   "license": "ISC",
   "devDependencies": {
     "jest": "^27.1.0"
