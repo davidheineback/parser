@@ -1,6 +1,6 @@
 {
   "name": "@david-heineback/parser",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Parses string",
   "type": "module",
   "main": "index.js",
