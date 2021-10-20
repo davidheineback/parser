@@ -1,4 +1,4 @@
-# Mall för inlämning laboration 1, 1dv610
+# Mall för inlämning laboration 2, 1dv610
 
 ## Checklista
   - [x] Jag har skrivit all kod och reflektioner själv. Jag har inte använt mig av andras kod för att lösa uppgiften.
@@ -18,7 +18,7 @@
     -[x] Jag är noga i min testning
     - [x] En del av testfallen är automatiserade (Tokenizer/Parser/PP), viss del kan vara manuellt testad.
     - [x] Det finns en tydlig beskrivning i hur mina moduler skall användas. 
-    - [ ] Mina reflektioner visar tydligt att jag förstått bokens koncept.
+    - [x] Mina reflektioner visar tydligt att jag förstått bokens koncept.
   - [ ] Jag eftersträvar med denna inlämning högsta betyg (A-B) 
     - [ ] Sammanhängande reflektion som ger ett gott helhetsintryck och visar detaljerad förståelse för kodkvalitet.
     - [ ] Min kod är ... (pussar fingrar och gör smackljud)
@@ -73,33 +73,129 @@ Tester kan köras via kommandot npm test.
 ## Kapitelreflektioner för kapitel 2-11
 
 ### Kapitel 2 - Meaningful names
-PrettyPrinter - Don't be cute.  
-Sentences vs Sentence väldigt lika.  
+Precis som i Tokenizer uppgiften har jag försökt följa de riktlinjer som finns i Meaningful names kapitlet. Jag har använder **Pronounceable Names** och hellre långa namn som avslöjar vad en klass/metod förväntas göra.  
+Ett par ytterligare reflektioner jag gjort är PrettyPrinter har en sentimental eller historisk blinkning och går där med emot **Don't be cute**. Jag hade hellre bara döpt den till Printer.  
+En annan tanke är att klasserna **Sentences** och **Sentence** väldigt lika 
+**(Avoid disinformation)**. Men jag har lagt sentence som ett eget paket för att försöka separera de lite mer.  
+Ytterligare en klass som först bröt mot **Avoid disinformation** är den som nu heter ParserFacade som finns i prettyprinter. Jag döpte den först till endast Parser men eftersom den kunde blandas ihop med att vara en parser så valde jag att döpa om den även om själva Parsern ligger i sitt eget projekt.  
+
+<br/>  
 
 ### Kapitel 3 - Functions
-Flera metoder på olika klasser som heter för att undvika Law of demeter.
+Även här har jag tagit hänsyn till **use descriptive names** precis som i kaptiel 2 och i Tokenizer. Jag har försökt att hålla alla metoder korta och enkla att följa med i och istället för att ha stora metoder så är det nedbrutet i flera **"Small!"**.
+I största möjliga mån har jag undvikit **switch statements** och endast lagt de i mina "Factory" klasser.  
+Mina metoder har väldig få argument, **niladic** eller **monadiac** i princip för samtliga i Parser projektet förutom en metod i Validatorn som ska jämföra två värden vilket gör det naturligt att vi behöver skicka med båda värden som ska jämföras.  
+<br/>
 
 ### Kapitel 4 - Comments  
-Använder endast jsdoc kommentarer på de viktagaste publika klasserna.
+**Explain your self with code**. Istället för att använda kommenterar som förklarar vad en kodrad eller ett kodavsnitt gör har jag använt beskrivande namn.
+
+![Explain Without Comment](./img/explainWithoutComment.png)
+
+Jag har inga tvingande kommentarer **(Mandated Comments)** utan använder JSDoc kommentarer på de viktagaste publika klasserna och metoderna för att förklara vad de gör **(Javadocs in Nonpublic code)**. Detta gör att jag enkelt undviker **noice comments**.  
+Jag har heller ingen kod utkommenterad kodstycken som är obseleta eller tänka att använda senare eller i annan version av programmet **(Commented-Out-Code)**.
+
+<br/>
 
 ### Kapitel 5 - Formatting
-If satser innehåller till viss del lång formattering i villkor.
-Vertical openness kommer ganska av sig själv om man följer Functions kapitlet
-"Each group of lines represents a complete thought"
+För de if-satser som innehåller långa rader eller flera villkor så har jag valt att lägga det som en egen metod istället så att koden ska bli mer lättläst **(Horizontal Formatting)**. 
+
+![if condition](./img/explainWithoutComment.png)
+![if conditional method](./img/conditional-methods.png)
+
+Jag har även försökt följa **Vertical Density** så att kod som hör ihop hamnar nära varandra. Om vi kollar på Documentklassen så ligger de privata metoderna som används för kontroller tillsammans och de publika metoderna som ska användas utav en användare tillsammans.
+
+**Vertical openness** tycker jag kommer med på köpet efter som jag följer de riktlinjer som finns Functions kapitlet även om det "Each group of lines represents a expression". Jag har även tomma rader mellan varje metod.  
+<br/>
 
 ### Kapitel 6 - Objects and Data Structures
+Jag använder mig av privata attribut och metoder i så lång utsträckning som jag kan för att hålla en **hög abstraktionsnivå**. I PrettyPrinter har jag även lagt en fasad klass som är till för att dölja de mer komplexa delarna för användaren. 
+
+![Facade](./img/facade.png)  
+
+<br/>  
+
+
+För att undvika **Law of demeter** och medföljande **train wrecks** har jag metoder som har samma namn men ligger i olika klasser. Från början kallade jag bara på getAllSentences i Document och därefter kedjade på den filtreringsmetod som jag ville använda från Sentences objektet. 
+
+![Law of demeter](./img/avoid-lawOfDemeter.png)
+
+Jag hade även en tanke om att endast ha en filtrerings metod i Sentences som kunde ta emot en typ som argument och sedan filtrera på typen men kände ganska snabbt att om jag lägger till ytterligare en meningstyp t.ex. "SuperExclamation" som är att en mening avslutas med !!! så vill jag kanske kunna filtrera ut den tillsammans med de vanliga Exclamations och då blev det betydligt mycket bättre med att göra som jag har nu och bara kunna lägga till det i filtreringen istället för att ändra med flera attribut och att det inbland kan skickas in ett "undefined" som typ.
+<br/>
+
 
 ### Kapitel 7 - Error Handling
+Kan använder endast try/catch i PrettyPrinter och den kommer fånga de undantag som kastas både från Parser och från Tokenizer och visa som error. Eventuellt bör jag omslutit även Tokenizeringen inne i Parsern med try/catch men eftersom det är ytterligare ett lager som ska till för att utnyttja Parsern så tycker jag att det är upp till användaren att hantera alla de undantag som kastas. Om ett fel kastas till PrettyPrinter så skrivs felmeddelandet ut och användaren får möjlighet att skriva en ny sträng istället för att programmet crashar.
+
+![try-catch](./img/try-catch.png)  
+
+Jag funderade över **Provide Context with Exceptions** då jag inte delger någon speciell kontext till mina fel däremot så kastar jag endast fel då användaren skickat in någon felaktig information och jag skriver ut vad det är som är fel vilket på sitt sätt ger en kontext till användaren vad som är fel.  
+
+![errors](./img/errors.png)  
+
+<br/>
 
 ### Kapitel 8 - Boundaries
-Tredjepart i Tokenizer och readline från nodejs.
+**Using Third-Party Code** Jag använder mig av min egen Tokenizer vilken skulle kunna ses som en tredje part men eftersom jag inte använder Dependecy injection för att få en Tokenizer i min Document.parse metod så har jag kontroll över vilken Tokenizer som används och dess förväntade funktionalitet.  
+
+![Tokenizer attribute](./img/tokenizer-attribute.png)  
+
+Men även att jag har kontrollen över den så har jag lagt det som ett npm paket vilket gör att om jag uppdaterar paketet för Tokenzier utan att tänka på det i Parser så kan det vara så att min Parser använder en gammal och eventuellt buggig version av min Tokenizer.   
+
+![Tokenizer dependency](./img/tokenizer-dependency.png) 
+
+**Learning (Tests)** Jag har inte skrivit några separata tester för tredje parts moduler men jag fick testa mycket manuellt för den i Node.js inbyggda modulen readline för att få den att fungera och förstå att den var asynkron och att jag behövde skapa ett Promise och sedan returnera det med resolve som finns på Promise metoden.  
+
+![Readline promise](./img/readline-promise.png)
+
+<br/>
 
 ### Kapitel 9 - Unit Tests
+Jag har skrivit automatiska tester och jag började med en **Test Driven Developement** approach och skrev ett antal tester för de saker som jag visste att jag behövde t.ex. Document.parse.  
+Men sedan allteftersom så blev det mer att jag behövde utöka och refaktorera koden och då skrev jag istället testerna efter att den ursprungliga versionen av koden var skriven och sedan fick jag refaktorera igen tills dess att jag passerade mina tester.  
+Jag har försökt använda beskrivande namn på testfallen och varje enskilt test är oftast bara en rad och innehåller endast en assert **(Clean test & One Assert per test)**  
 
-### Kapitel 10 - Classes
+![Test code](./img/small-tests.png)  
+
+Samtliga tester är skrivna med **F.I.R.S.T**   
+
+**Fast**: De är små och exekveras snabbt.  
+
+**Independent**: Testerna är helt oberoende av varandra.  
+
+**Repeatable**: Fungerar att köra i en utveckling eller produktionsmiljö (node).  
+
+**Self-Validating**: Returnerar endast booleans.  
+
+**Timely**: Som tidigare nämst så är de första testerna skrivna helt utan att någon kod är skriven och sedan är resterande tester skrivna utifrån den första versionen av den kod som skrivits och jag har sedan refaktorerat koden för att passera testerna och inte tvärtom.  
+
+<br/>
+
+### Kapitel 10 - Classes  
+  **Classes should be small!**: Jag har generellt sätt försökt hålla mina klasser små och när jag märkt att de börjar bli större och får ansvar för mer än en sak **(Singe Responsibility Principle)** så har jag antingen brutit ut en del av koden till en helt separat klass eller skapat en "parent-klass" vilket i java hade varit en Abstrakt-klass och sedan har flera subklasser som extendar dessa. 
+
+  ![extends](./img/extends.png)
+
+  Värt att nämna är att även klassernas namngivning genomsyras av det som tagits upp i Kapitel 2 där de får namn efter vad de har för ansvarsområde eller kanske rättare sagt vad ett instans av klassen kommer att representera. t.ex. mina Factory klasser avslutas med nyckelordet Factory. 
+
+  ![class names](./img/class-name.png)
+
+  Som jag tog upp under Kapitel 6 så har jag försökt hålla klasserna så inkapslade och abstrakta som möjligt och bara exponera sådan publikt som absolut måste vara publikt för att kunna använda programmet.
+
+<br/>
 
 ### Kapitel 11 - Systems
+Där jag behöver skapa ny objekt (Sentence i Parser eller View i PrettyPrinter) så har jag skapat **Factories** för att hantera vilket objekt det är som ska skapas.  
 
+![Factory](./img/factory.png)
+
+Återigen kan vi prata om **Dependecy Injection** som tidigare nämnst bör man kanske skickat med Tokenizer som argument till Document för att separera koden och göra koden mindre beroende av en specifik Tokenizer men eftersom jag vill ha kontrollen så är den inbyggd i Document klassen.  
+
+**Scaling Up** Precis som nämns i boken så har jag inte försökt bygga allt rätt från början utan istället börjat så litet jag kan med att bara få ut en mening och sedan refaktorera koden flera gånger för att till slut få fram de funktioner som krävs för att uppfylla kraven på programmet. Vilket man kan se på de antalet commits som gjorts, i skrivande stund är det 103 commits för Parsern och ytterligare ett antal för PrettyPrinter.
+
+![commits](./img/commits.png)
+
+<br/>
 
 ## Laborationsreflektion
 Reflektera över uppgiften utifrån din utveckling som programmerare. 
