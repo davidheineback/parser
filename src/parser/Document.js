@@ -33,8 +33,8 @@ export default class Document {
     while (this.#tokenContainer.getActiveToken().tokenValue !== 'END') {
       const token = this.#tokenContainer.getActiveToken()
       this.#currentSentence.push(token)
-      if (this.hasValidEnd()) {
-        if (this.#validator.isValidSentenceLength(this.#currentSentence.length)) {
+      if (this.#hasValidEnd()) {
+        if (this.#isValidSentenceLength()) {
           const newSentence = this.#sentences.createSentence({ 'type': `${token.tokenType}`, 'sentence': this.#currentSentence })
           this.#sentences.push(newSentence)
           this.#currentSentence = []
@@ -58,9 +58,13 @@ export default class Document {
     return newSentence.getSentenceAsString()
   }
 
-  hasValidEnd() {
+  #hasValidEnd() {
     const currentToken = this.#currentSentence.slice(-1)[0]
     return this.#validator.isValidEndToken(currentToken.tokenType)
+  }
+
+  #isValidSentenceLength() {
+    return this.#validator.isValidSentenceLength(this.#currentSentence.length)
   }
 
   getAllSentences() {
