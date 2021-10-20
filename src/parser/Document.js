@@ -23,7 +23,7 @@ export default class Document {
   }
 
   /**
-   *
+   * Takes a string as argument and parses it into sentences.
    *
    * @param {String} stringToParse - A string to parse into sentences.
    * @memberof Document
