@@ -14,7 +14,7 @@
     - [ ] All kod samt historik finns i git 
     - [ ] Reflektionerna är skrivna
     - [ ] Koden är läsbar
-  - [x] Jag eftersträvar med denna inlämning högre betyg (C) och anser mig uppfylla alla extra krav för detta. 
+  - [x] Jag eftersträvar med denna inlämning högre betyg (C) och anser mig uppfylla alla extra krav för detta.  
     -[x] Jag är noga i min testning
     - [x] En del av testfallen är automatiserade (Tokenizer/Parser/PP), viss del kan vara manuellt testad.
     - [x] Det finns en tydlig beskrivning i hur mina moduler skall användas. 
@@ -42,12 +42,12 @@ Förtydligande: Examinator kommer sätta betyg oberoende på vad ni anser. Att h
     - [PrettyPrinter README.md](https://github.com/davidheineback/prettyprinter#readme)  
     
  * Beskriv hur du säkerhetställt att beroendena mellan komponenterna är som beskrivs i laborationen. 
-    - [Tokenizer](https://gitlab.lnu.se/1dv610/student/du222aa/l1) är ett NPM paket och helt oberoende av koden i [Parser](https://gitlab.lnu.se/1dv610/student/du222aa/l2) & [PrettyPrinter](https://github.com/davidheineback/prettyprinter)
-    - Även [Parser](https://gitlab.lnu.se/1dv610/student/du222aa/l2) är ett NPM paket och parsningen sker i parse metoden på Document klassen och denna testas av de automatiska testerna helt utan att PrettyPrinter är inblandad.
+    - [Tokenizer](https://gitlab.lnu.se/1dv610/student/du222aa/l1) är ett [NPM paket](https://www.npmjs.com/package/@david-heineback/tokenizer) och helt oberoende av koden i [Parser](https://gitlab.lnu.se/1dv610/student/du222aa/l2) & [PrettyPrinter](https://github.com/davidheineback/prettyprinter)
+    - Även [Parser](https://gitlab.lnu.se/1dv610/student/du222aa/l2) är ett [NPM paket](https://www.npmjs.com/package/@david-heineback/parser) och parsningen sker i parse metoden på Document klassen och denna testas av de automatiska testerna helt utan att PrettyPrinter är inblandad.
     - [PrettyPrinter](https://github.com/davidheineback/prettyprinter) har beroende av Parser som installeras när man kör npm install.
 
 ## Beskrivning av min kod
-Klassdiagramet visar de viktigaste klasserna ock dess relationer.  
+Klassdiagramet visar en hög abstraktionsnivå av de viktigaste klasserna ock dess relationer.  
 Det viktigaste för att parsningen ska fungera är Document-klassen eftersom denna innehåller parse metoden.  
 Inne i parse metoden skapar jag en Tokenizer vilket man skulle kunna skicka med som argument via konstruktorn i Document men eftersom jag vill vara den som har kontroll över vilken Tokenizer det är som används så valde jag istället att bygga in denna istället för att lägga den som parameter.  
 Klassdiagrammet visar även att beroendet är så som beskrivits i uppgiften.
@@ -82,7 +82,8 @@ Ytterligare en klass som först bröt mot **Avoid disinformation** är den som n
 <br/>  
 
 ### Kapitel 3 - Functions
-Även här har jag tagit hänsyn till **use descriptive names** precis som i kaptiel 2 och i Tokenizer. Jag har försökt att hålla alla metoder korta och enkla att följa med i och istället för att ha stora metoder så är det nedbrutet i flera **"Small!"**.
+Även här har jag tagit hänsyn till **use descriptive names** precis som i kaptiel 2 och i Tokenizer.  
+Jag har försökt att hålla alla metoder korta och enkla att följa med i och istället för att ha stora metoder så är det nedbrutet i flera **"Small!"**.  
 I största möjliga mån har jag undvikit **switch statements** och endast lagt de i mina "Factory" klasser.  
 Mina metoder har väldig få argument, **niladic** eller **monadiac** i princip för samtliga i Parser projektet förutom en metod i Validatorn som ska jämföra två värden vilket gör det naturligt att vi behöver skicka med båda värden som ska jämföras.  
 <br/>
@@ -100,12 +101,13 @@ Jag har heller ingen kod utkommenterad kodstycken som är obseleta eller tänka 
 ### Kapitel 5 - Formatting
 För de if-satser som innehåller långa rader eller flera villkor så har jag valt att lägga det som en egen metod istället så att koden ska bli mer lättläst **(Horizontal Formatting)**. 
 
-![if condition](./img/explainWithoutComment.png)
+![if condition](./img/explainWithoutComment.png)  
 ![if conditional method](./img/conditional-methods.png)
 
 Jag har även försökt följa **Vertical Density** så att kod som hör ihop hamnar nära varandra. Om vi kollar på Documentklassen så ligger de privata metoderna som används för kontroller tillsammans och de publika metoderna som ska användas utav en användare tillsammans.
 
-**Vertical openness** tycker jag kommer med på köpet efter som jag följer de riktlinjer som finns Functions kapitlet även om det "Each group of lines represents a expression". Jag har även tomma rader mellan varje metod.  
+**Vertical openness** tycker jag kommer med på köpet efter som jag följer de riktlinjer som finns Functions kapitlet och även **"Each group of lines represents a expression"** eftersom att varje metod oftast representerar ett uttryck.  
+Jag har även tomma rader mellan varje metod.  
 <br/>
 
 ### Kapitel 6 - Objects and Data Structures
@@ -120,12 +122,13 @@ För att undvika **Law of demeter** och medföljande **train wrecks** har jag me
 
 ![Law of demeter](./img/avoid-lawOfDemeter.png)
 
-Jag hade även en tanke om att endast ha en filtrerings metod i Sentences som kunde ta emot en typ som argument och sedan filtrera på typen men kände ganska snabbt att om jag lägger till ytterligare en meningstyp t.ex. "SuperExclamation" som är att en mening avslutas med !!! så vill jag kanske kunna filtrera ut den tillsammans med de vanliga Exclamations och då blev det betydligt mycket bättre med att göra som jag har nu och bara kunna lägga till det i filtreringen istället för att ändra med flera attribut och att det inbland kan skickas in ett "undefined" som typ.
+Jag hade även en tanke om att endast ha en filtrerings metod i Sentences som kunde ta emot en typ som argument och sedan filtrera på typen men kände ganska snabbt att om jag lägger till ytterligare en meningstyp t.ex. "SuperExclamation" som är att en mening avslutas med !!! så vill jag kanske kunna filtrera ut den tillsammans med de vanliga Exclamations och då blev det betydligt mycket bättre att göra som jag har nu och bara kunna lägga till det i filtreringen istället för att ändra flera attribut och att det inbland kan skickas in ett "undefined" som typ.
 <br/>
 
 
 ### Kapitel 7 - Error Handling
-Kan använder endast try/catch i PrettyPrinter och den kommer fånga de undantag som kastas både från Parser och från Tokenizer och visa som error. Eventuellt bör jag omslutit även Tokenizeringen inne i Parsern med try/catch men eftersom det är ytterligare ett lager som ska till för att utnyttja Parsern så tycker jag att det är upp till användaren att hantera alla de undantag som kastas. Om ett fel kastas till PrettyPrinter så skrivs felmeddelandet ut och användaren får möjlighet att skriva en ny sträng istället för att programmet crashar.
+Jag använder endast try/catch i PrettyPrinter och den kommer fånga de undantag som kastas både från Parser och från Tokenizer och visa som error. Eventuellt bör jag omslutit även Tokenizeringen inne i Parsern med try/catch men eftersom det är ytterligare ett lager som ska till för att utnyttja Parsern så tycker jag att det är upp till användaren att hantera alla de undantag som kastas.  
+Om ett fel kastas till PrettyPrinter så skrivs felmeddelandet ut och användaren får möjlighet att skriva en ny sträng istället för att programmet crashar.
 
 ![try-catch](./img/try-catch.png)  
 
@@ -152,7 +155,7 @@ Men även att jag har kontrollen över den så har jag lagt det som ett npm pake
 
 ### Kapitel 9 - Unit Tests
 Jag har skrivit automatiska tester och jag började med en **Test Driven Developement** approach och skrev ett antal tester för de saker som jag visste att jag behövde t.ex. Document.parse.  
-Men sedan allteftersom så blev det mer att jag behövde utöka och refaktorera koden och då skrev jag istället testerna efter att den ursprungliga versionen av koden var skriven och sedan fick jag refaktorera igen tills dess att jag passerade mina tester.  
+Men sedan allteftersom så blev det mer att jag behövde utöka och refaktorera koden och då skrev jag istället testerna efter att den ursprungliga versionen av koden var skriven och sedan fick jag refaktorera koden igen tills dess att jag passerade mina tester.  
 Jag har försökt använda beskrivande namn på testfallen och varje enskilt test är oftast bara en rad och innehåller endast en assert **(Clean test & One Assert per test)**  
 
 ![Test code](./img/small-tests.png)  
@@ -167,7 +170,7 @@ Samtliga tester är skrivna med **F.I.R.S.T**
 
 **Self-Validating**: Returnerar endast booleans.  
 
-**Timely**: Som tidigare nämst så är de första testerna skrivna helt utan att någon kod är skriven och sedan är resterande tester skrivna utifrån den första versionen av den kod som skrivits och jag har sedan refaktorerat koden för att passera testerna och inte tvärtom.  
+**Timely**: Som tidigare nämnst så är de första testerna skrivna helt utan att någon kod är skriven och sedan är resterande tester skrivna utifrån den första versionen av den kod som skrivits och jag har sedan refaktorerat koden för att passera testerna och inte tvärtom.  
 
 <br/>
 
@@ -197,6 +200,7 @@ Där jag behöver skapa ny objekt (Sentence i Parser eller View i PrettyPrinter)
 
 <br/>
 
-## Laborationsreflektion
-Reflektera över uppgiften utifrån din utveckling som programmerare. 
-Vad har du lärt dig och vad ser du fram emot att lära dig?
+## Laborationsreflektion  
+Eftersom att jag hade med sig Kapitel 2 och 3 från Tokenizer så blev kodkvalitén bättre direkt i denna uppgiften.  
+Vi har sedan vi började utbildningen fått höra att den bästa koden är den vi själva förstår men mitt synsätt har ändrats under kursen mer till att den bästa koden är sådan kod som någon annan person förstår. Med det menar jag att någon annan programmerare ska kunna få en övergripande bild och förståelse utan att behöva förstå eller sätta sig in avancerade koncept och modeller.  
+Jag har även lärt mig att det är vanskligt att göra antaganden som programmerare och utveckla något som man tror det ska fungera eller hur man tror kunden vill ha det. Ett bra sätt att kontrollera detta är att skriva och genomföra testning av koden och även ha konternuelig avstämning med beställaren.
